@@ -1,10 +1,10 @@
 use std::ops::Drop;
 
-use crate::ffi;
-use crate::utils::ScopedPhantomcow;
-use crate::MessageOwner;
-use crate::Tags;
-use crate::TagsOwner;
+use ffi;
+use utils::ScopedPhantomcow;
+use MessageOwner;
+use Tags;
+use TagsOwner;
 
 #[derive(Debug)]
 pub struct MessagesPtr {

@@ -2,8 +2,8 @@ use std::ffi::CStr;
 use std::iter::Iterator;
 use std::ops::Drop;
 
-use crate::ffi;
-use crate::utils::ScopedPhantomcow;
+use ffi;
+use utils::ScopedPhantomcow;
 
 pub trait TagsOwner {}
 

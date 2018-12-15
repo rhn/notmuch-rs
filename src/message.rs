@@ -2,14 +2,14 @@ use std::ffi::CString;
 use std::path::PathBuf;
 use supercow::{Supercow};
 
-use crate::error::{Error, Result};
-use crate::ffi;
-use crate::utils::{ToStr, ScopedPhantomcow, ScopedSupercow};
-use crate::Filenames;
-use crate::FilenamesOwner;
-use crate::Messages;
-use crate::Tags;
-use crate::TagsOwner;
+use error::{Error, Result};
+use ffi;
+use utils::{ToStr, ScopedPhantomcow, ScopedSupercow};
+use Filenames;
+use FilenamesOwner;
+use Messages;
+use Tags;
+use TagsOwner;
 
 pub trait MessageOwner: Send + Sync {}
 

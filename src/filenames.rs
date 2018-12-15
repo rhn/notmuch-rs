@@ -3,8 +3,8 @@ use std::iter::Iterator;
 use std::ops::Drop;
 use std::path::PathBuf;
 
-use crate::ffi;
-use crate::utils::ScopedPhantomcow;
+use ffi;
+use utils::ScopedPhantomcow;
 
 pub trait FilenamesOwner {}
 

@@ -1,7 +1,7 @@
 use std;
 use std::{error, fmt, io, result};
 
-use crate::ffi;
+use ffi;
 
 pub type Result<T> = result::Result<T, Error>;
 
@@ -20,17 +20,17 @@ impl fmt::Display for Error {
 
 impl std::error::Error for Error {
     fn description(&self) -> &str {
-        match self {
-            Error::IoError(e) => error::Error::description(e),
-            Error::NotmuchError(e) => e.description(),
+        match *self {
+            Error::IoError(ref e) => error::Error::description(e),
+            Error::NotmuchError(ref e) => e.description(),
             Error::UnspecifiedError => "Generic notmuch error",
         }
     }
 
-    fn cause(&self) -> Option<&dyn error::Error> {
-        match self {
-            Error::IoError(e) => Some(e),
-            Error::NotmuchError(e) => Some(e),
+    fn cause(&self) -> Option<&error::Error> {
+        match *self {
+            Error::IoError(ref e) => Some(e),
+            Error::NotmuchError(ref e) => Some(e),
             Error::UnspecifiedError => None,
         }
     }

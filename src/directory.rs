@@ -1,11 +1,11 @@
 use std::ops::Drop;
 use supercow::Supercow;
 
-use crate::ffi;
-use crate::Database;
-use crate::Filenames;
-use crate::FilenamesOwner;
-use crate::utils::{ScopedSupercow, ScopedPhantomcow};
+use ffi;
+use Database;
+use Filenames;
+use FilenamesOwner;
+use utils::{ScopedSupercow, ScopedPhantomcow};
 
 #[derive(Debug)]
 pub(crate) struct DirectoryPtr {

@@ -3,14 +3,14 @@ use std::ptr;
 
 use supercow::{Phantomcow, Supercow};
 
-use crate::error::Result;
-use crate::ffi;
-use crate::ffi::Sort;
-use crate::Database;
-use crate::Messages;
-use crate::MessageOwner;
-use crate::Threads;
-use crate::utils::ScopedSupercow;
+use error::Result;
+use ffi;
+use ffi::Sort;
+use Database;
+use Messages;
+use MessageOwner;
+use Threads;
+use utils::ScopedSupercow;
 
 #[derive(Debug)]
 pub(crate) struct QueryPtr {
