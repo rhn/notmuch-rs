@@ -107,6 +107,8 @@ unsafe impl<'o, O> Sync for Messages<'o, O> where O: MessageOwner + 'o {}
 
 #[cfg(test)]
 mod tests {
+    use std::env;
+    
     // This will not compile if ownership can't be subject to recursion
     fn descend<'o, O: 'o + super::MessageOwner, T: Iterator<Item=super::Message<'o, O>>>(iter: T)
             -> usize {
@@ -132,6 +134,27 @@ mod tests {
             }
             Err(err) => {
                 panic!("Got error while trying to open db: {:?}", err);
+            }
+        }
+    }
+    
+    /// This is a crash example; as a test it should not compile
+    #[test]
+    pub fn crash_libnotmuch() -> () {
+        match database::Database::open(
+            &env::var("MAILDIR").expect("No MAILDIR env variable, cannot test"),
+            database::DatabaseMode::ReadOnly,
+        ) {
+            Ok(db) => {
+                let query = db.create_query("001-child@example.org").unwrap();
+                let message = {
+                    let mut messages = query.search_messages().unwrap();
+                    messages.next().expect("No message found, make sure the threading maildir is in use")
+                }; // messages gets dropped here, causing libnotmuch to abort
+                message.tags();
+            },
+            Err(err) => {
+                panic!("No database");
             }
         }
     }
