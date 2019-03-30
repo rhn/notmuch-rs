@@ -80,6 +80,10 @@ where
         unsafe { ffi::notmuch_message_get_date(self.ptr) as i64 }
     }
 
+    /// Returns a specified header, case insensitive.
+    ///
+    /// If the header is not present, returns Ok(None).
+    /// Error value is not exposed via the notmuch API.
     pub fn header(&self, name: &str) -> Result<Option<&str>> {
         let name = CString::new(name).unwrap();
         let ret = unsafe { ffi::notmuch_message_get_header(self.ptr, name.as_ptr()) };

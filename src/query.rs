@@ -38,6 +38,13 @@ impl<'d> Query<'d> {
         }
     }
 
+    /// Creates the query from a `Database` instance.
+    ///
+    /// The `db` parameter may implicitly be cloned.
+    /// That can be leveraged to obtain `Query` instances with a `'static` lifetime
+    /// if the `db` parameter is an `std::sync::Arc<Database>`
+    /// or an `std::rc::Rc<Database>`.
+    /// Such instances can be safely returned from functions.
     pub fn create<D>(db: D, query_string: &str) -> Result<Self>
     where
         D: Into<Supercow<'d, Database>>,
